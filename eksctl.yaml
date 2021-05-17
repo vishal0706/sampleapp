@@ -1,0 +1,30 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: sample-website
+  region: us-east-2
+
+cloudWatch:
+  clusterLogging:
+    enableTypes: ["*"]
+    
+iam:
+  withOIDC: true
+
+managedNodeGroups:
+- desiredcapacity: 1
+  instanceType: t3a.medium
+  maxSize: 2
+  minSize: 1
+  name: ng1
+  volumesize: 8
+
+- desiredcapacity: 1
+  instanceType: t3a.medium
+  maxSize: 2
+  minSize: 1
+  name: ng2
+  volumesize: 8
+
+    

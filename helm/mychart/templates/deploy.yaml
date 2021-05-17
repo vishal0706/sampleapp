@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sampledeploy
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: sampleapp
+  template:
+    metadata:
+      labels:
+        name: sampleapp
+    spec:
+      securityContext:
+        fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
+      containers:
+        - image: vishalarche123/samplewebsite:latest
+          imagePullPolicy: Always
+          name: samplecontainer
+          ports:
+          - containerPort: 80
+          resources:
+            limits:
+              cpu: 250m
+              memory: 500Mi
+            requests:
+              cpu: 250m
+              memory: 500Mi
